@@ -1,6 +1,7 @@
-let answer = 8;
-
-while (true) {
+let answer = random(1, 10);
+let done = false;
+function
+while (!done) {
     let guess = prompt("Enter a number between 1 and 10");
 
     if (guess < answer) {
@@ -11,6 +12,6 @@ while (true) {
     }
     else {
         alert("You got it!");
-        break;
+        done = true;
     }
 }
