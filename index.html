@@ -1,11 +1,19 @@
 <html>
-	<head>
-		<title>LHH Programming</title>
-		<script type="text/javascript" src="index.js"></script>
-	</head>
-	<body>
-		<h1>LHH Programming</h1>
-		<p>Welcome to my LHH Programming course's testbed.</p>
-		<button type="button"  onclick="showAlert();">Click Me</button>
-	</body>
+<head>
+	<title>Shuffling a deck of cards</title>
+	<link rel="stylesheet" href="index.css">
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="board">
+		<img
+			class="card"
+			v-bind:class="{ selected: card.selected }"
+			v-for="card in cards"
+			v-bind:src="card.file"
+			v-bind:id="card.id"
+			v-on:click="cardClicked" />
+	</div>
+	<script type="text/javascript" src="index.js"></script>
+</body>
 </html>

@@ -1,0 +1,9 @@
+img.card {
+    height: 1.452in;
+    width: 1in;
+    padding: 3px;
+}
+
+img.card.selected {
+    background-color: blue;
+}
