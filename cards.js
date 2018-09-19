@@ -34,6 +34,8 @@ var app = new Vue({
 		lastClickedId: '',
 	},
 	methods: {
+		shuffle: shuffle,
+
 		cardClicked: function(event) {
 			if (this.lastClickedId == '') {
 				this.lastClickedId = event.target.id;
@@ -47,11 +49,15 @@ var app = new Vue({
 		},
 
 		swapCards: function(id1, id2) {
-			let newCards = this.cards.map(function(elt) { return elt; });
-
 			let index1 = this.findCardIndex(id1);
 
 			let index2 = this.findCardIndex(id2);
+
+			this.swap(index1, index2);
+		},
+
+		swap: function(index1, index2) {
+			let newCards = this.cards.map(function(elt) { return elt; });
 
 			let temp = newCards[index1];
 			newCards[index1] = newCards[index2];

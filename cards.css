@@ -7,3 +7,7 @@ img.card {
 img.card.selected {
     background-color: blue;
 }
+
+button {
+    font-size: 14pt;
+}
