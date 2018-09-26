@@ -21,6 +21,7 @@ for (let suit of suits) {
 			file: fileFor(rank, suit),
 			id: 'card' + id,
 			selected: false,
+			reversed: false,
 		});
 
 		id++;

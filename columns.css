@@ -1,0 +1,45 @@
+span.card {
+    display: inline-block;
+    height: 0.25in /*1.452in*/;
+    width: 1in;
+    padding: 0px 3px;
+}
+
+span.card.selected img {
+    background-color: blue;
+    padding: 3px;
+    margin: 0px;
+}
+
+span.card img {
+    height: 1.452in;
+    width: 1in;
+    padding: 0px;
+    margin: 3px;
+}
+
+span.card span.back {
+    display: none;
+}
+
+span.card.reversed img {
+    display: none;
+}
+
+span.card.reversed span.back {
+    display: inline-block;
+    height: 1.452in;
+    width: 1in;
+    background-image: linear-gradient(to bottom right, red, orange);
+    border-style: solid;
+    border-width: 0.05in;
+    border-color: darkred;
+    border-radius: 0.05in;
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 3px;
+}
+
+button {
+    font-size: 14pt;
+}

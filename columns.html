@@ -1,0 +1,24 @@
+<html>
+<head>
+	<title>Shuffling a deck of cards</title>
+	<link rel="stylesheet" href="columns.css">
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script type="text/javascript" src="utils.js"></script>
+	<script type="text/javascript" src="shuffle.js"></script>
+</head>
+<body>
+	<div id="board">
+		<p><button v-on:click="shuffle">Shuffle!</button></p>
+		<span
+			class="card"
+			v-bind:class="{ selected: card.selected, reversed: card.reversed }"
+			v-for="card in cards"
+			><img
+				v-bind:src="card.file"
+				v-on:click="cardClicked"
+				v-bind:id="card.id"
+				/><span class="back"></span>
+	</div>
+	<script type="text/javascript" src="cards.js"></script>
+</body>
+</html>
