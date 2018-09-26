@@ -10,14 +10,17 @@
 	<div id="board">
 		<p><button v-on:click="shuffle">Shuffle!</button></p>
 		<span
+			v-for="card in cards"
 			class="card"
 			v-bind:class="{ selected: card.selected, reversed: card.reversed }"
-			v-for="card in cards"
+			v-bind:id="card.id"
 			><img
-				v-bind:src="card.file"
-				v-on:click="cardClicked"
-				v-bind:id="card.id"
-				/><span class="back"></span>
+				v-on:click="cardClicked2(card)"
+				v-bind:src="card.file()"
+			/><span
+				class="back"
+				v-on:click="cardClicked2(card)"
+			></span>
 	</div>
 	<script type="text/javascript" src="cards.js"></script>
 </body>

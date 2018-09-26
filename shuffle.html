@@ -13,7 +13,7 @@
 			class="card"
 			v-bind:class="{ selected: card.selected }"
 			v-for="card in cards"
-			v-bind:src="card.file"
+			v-bind:src="card.file()"
 			v-bind:id="card.id"
 			v-on:click="cardClicked" />
 	</div>

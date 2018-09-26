@@ -1,7 +1,7 @@
 let suits = ['spades', 'hearts', 'diamonds', 'clubs'];
 let ranks = ['ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'jack', 'queen', 'king'];
 
-var cards = [];
+let cards = [];
 
 function fileFor(rank, suit) {
 	if (rank == 'jack' || rank == 'queen' || rank == 'king') {
@@ -11,6 +11,13 @@ function fileFor(rank, suit) {
 	return 'cards/' + rank + '_of_' + suit + '.png';
 }
 
+function swapProp(left, right, prop) {
+	let temp = left[prop];
+
+	left[prop] = right[prop];
+	right[prop] = temp;
+}
+
 let id = 0;
 
 for (let suit of suits) {
@@ -18,10 +25,20 @@ for (let suit of suits) {
 		cards.push({
 			rank: rank,
 			suit: suit,
-			file: fileFor(rank, suit),
 			id: 'card' + id,
 			selected: false,
 			reversed: false,
+			file: function() {
+				return fileFor(this.rank, this.suit);
+			},
+			swap: function(other) {
+				for (let prop of ['rank', 'suit', 'id', 'selected', 'reversed']) {
+					swapProp(this, other, prop);
+				}
+			},
+			name: function() {
+				return this.rank + ' of ' + this.suit;
+			},
 		});
 
 		id++;
@@ -33,6 +50,7 @@ var app = new Vue({
 	data: {
 		cards: cards,
 		lastClickedId: '',
+		lastClicked: null,
 	},
 	methods: {
 		shuffle: shuffle,
@@ -49,6 +67,18 @@ var app = new Vue({
 			this.selectCard(this.lastClickedId);
 		},
 
+		cardClicked2: function(card) {
+			if (this.lastClicked == null) {
+				this.lastClicked = card;
+				card.selected = true;
+			}
+			else {
+				this.lastClicked.selected = false;
+				this.lastClicked.swap(card);
+				this.lastClicked = null;
+			}
+		},
+
 		swapCards: function(id1, id2) {
 			let index1 = this.findCardIndex(id1);
 
@@ -58,13 +88,7 @@ var app = new Vue({
 		},
 
 		swap: function(index1, index2) {
-			let newCards = this.cards.map(function(elt) { return elt; });
-
-			let temp = newCards[index1];
-			newCards[index1] = newCards[index2];
-			newCards[index2] = temp;
-
-			this.cards = newCards;
+			this.cards[index1].swap(this.cards[index2])
 		},
 
 		selectCard: function(id) {
