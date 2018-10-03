@@ -4,24 +4,22 @@
 	<link rel="stylesheet" href="columns.css">
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<script type="text/javascript" src="utils.js"></script>
+	<script type="text/javascript" src="deal.js"></script>
 	<script type="text/javascript" src="shuffle.js"></script>
+	<script type="text/javascript" src="card-component.js"></script>
+	<script type="text/javascript" src="column-component.js"></script>
 </head>
 <body>
 	<div id="board">
-		<p><button v-on:click="shuffle">Shuffle!</button></p>
-		<span
-			v-for="card in cards"
-			class="card"
-			v-bind:class="{ selected: card.selected, reversed: card.reversed }"
-			v-bind:id="card.id"
-			><img
-				v-on:click="cardClicked2(card)"
-				v-bind:src="card.file()"
-			/><span
-				class="back"
-				v-on:click="cardClicked2(card)"
-			></span>
+		<p><button v-on:click="deal">Deal!</button></p>
+		<p>
+			<column
+			  v-for="column in columns"
+			  v-bind:key="column.id"
+			  v-bind:column="column"
+			  v-on:card-clicked="cardClicked"></column>
+		</p>
 	</div>
-	<script type="text/javascript" src="cards.js"></script>
+	<script type="text/javascript" src="columns.js"></script>
 </body>
 </html>
