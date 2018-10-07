@@ -1,8 +1,8 @@
-let answer = random(1, 10);
+let answer = random(1, 20);
 let done = false;
-function
+
 while (!done) {
-    let guess = prompt("Enter a number between 1 and 10");
+    let guess = prompt("Enter a number between 1 and 20");
 
     if (guess < answer) {
         alert("Too low!");
@@ -12,6 +12,6 @@ while (!done) {
     }
     else {
         alert("You got it!");
-        done = true;
+        done = true
     }
 }
