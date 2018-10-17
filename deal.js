@@ -2,15 +2,17 @@ const columnCount = 7;
 
 function deal() {
     //alert("Deal!");
-for(let col = 0; col < 7; col++){
-
+    let a = 0
+for(let row = 0; row < 7; row++){
+a = 0
+for(let col = row; col < 7; col++){
+a = a + 1
    let card = this.cards[col];
-   if(col > 0) {card.reversed = true};
-
+   card.reversed = true
+   if(a == 1) {card.reversed = false} else {card.reversed = true};
 
     this.columns[col].cards.push(card);
 
-
 }
-
+}
 }
