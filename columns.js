@@ -111,7 +111,14 @@ var app = new Vue({
 		},
 
 		cardClicked: function(card, column) {
-			cardClicked.call(this, card, column);
+			if (this.lastClicked != null) {
+				let lastCard = this.lastClicked.card;
+				let lastColumn = this.lastClicked.column;
+				cardClicked.call(this, card, column, lastCard, lastColumn);
+			}
+			else {
+				cardClicked.call(this, card, column, null, null);
+			}
 		},
 
 		emptySpotClicked: function(column) {
