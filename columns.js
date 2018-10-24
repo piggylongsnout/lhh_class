@@ -78,11 +78,25 @@ for (let i = 0; i < columnCount; ++i) {
 	});
 }
 
+let acePiles = [];
+
+for (let i = 0; i < 4; ++i) {
+	acePiles.push({
+		id: 'acePile' + i,
+		cards: [],
+
+		empty: function() {
+			return this.cards.length == 0;
+		},
+	});
+}
+
 var app = new Vue({
 	el: '#board',
 	data: {
 		cards: cards,
 		columns: columns,
+		acePiles: acePiles,
 		lastClicked: null,
 	},
 	methods: {

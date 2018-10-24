@@ -1,15 +1,19 @@
-span.column {
+p.ace-piles, p.columns {
+    text-align: center;
+}
+
+span.ace-pile, span.column {
     display: inline-block;
     width: 1in;
     padding: 3px;
     vertical-align: top;
 }
 
-span.column span.empty-spot {
+span.empty-spot {
     display: none;
 }
 
-span.column.empty span.empty-spot {
+span.empty span.empty-spot {
     display: inline-block;
     height: 1.452in;
     width: 1in;

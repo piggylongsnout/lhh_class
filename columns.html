@@ -8,14 +8,18 @@
 	<script type="text/javascript" src="shuffle.js"></script>
 	<script type="text/javascript" src="cardClicked.js"></script>
 	<script type="text/javascript" src="emptySpotClicked.js"></script>
+	<script type="text/javascript" src="ace-pile-component.js"></script>
 	<script type="text/javascript" src="card-component.js"></script>
 	<script type="text/javascript" src="column-component.js"></script>
 </head>
 <body>
 	<div id="board">
 		<p><button v-on:click="deal">Deal!</button></p>
-		<p>
-			<column
+		<p class="ace-piles"><ace-pile
+			  v-for="acePile in acePiles"
+			  v-bind:key="acePile.id"
+			  v-bind:ace-pile="acePile"></ace-pile></p>
+		<p class="columns"><column
 			  v-for="column in columns"
 			  v-bind:key="column.id"
 			  v-bind:column="column"
