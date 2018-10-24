@@ -5,6 +5,10 @@ span.column {
     vertical-align: top;
 }
 
+span.column span.empty-spot {
+    display: none;
+}
+
 span.column.empty span.empty-spot {
     display: inline-block;
     height: 1.452in;

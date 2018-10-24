@@ -16,6 +16,10 @@ Vue.component('column', {
 			return this.cards().length == 0;
 		},
 
+		emptySpotClicked: function() {
+			this.$emit('empty-spot-clicked', this.column);
+		},
+
 		id: function() {
 			return this.column.id;
 		},
@@ -40,7 +44,7 @@ Vue.component('column', {
 			  v-bind:card="card"
 			  v-on:card-clicked="cardClicked"
 			  ></card>
-			<span class="empty-spot"></span>
+			<span class="empty-spot" v-on:click="emptySpotClicked"></span>
 		</span>
 	`,
 });

@@ -99,5 +99,9 @@ var app = new Vue({
 		cardClicked: function(card, column) {
 			cardClicked.call(this, card, column);
 		},
+
+		emptySpotClicked: function(column) {
+			emptySpotClicked.call(this, column);
+		},
 	}
 });

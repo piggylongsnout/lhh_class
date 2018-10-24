@@ -7,6 +7,7 @@
 	<script type="text/javascript" src="deal.js"></script>
 	<script type="text/javascript" src="shuffle.js"></script>
 	<script type="text/javascript" src="cardClicked.js"></script>
+	<script type="text/javascript" src="emptySpotClicked.js"></script>
 	<script type="text/javascript" src="card-component.js"></script>
 	<script type="text/javascript" src="column-component.js"></script>
 </head>
@@ -18,7 +19,8 @@
 			  v-for="column in columns"
 			  v-bind:key="column.id"
 			  v-bind:column="column"
-			  v-on:card-clicked="cardClicked"></column>
+			  v-on:card-clicked="cardClicked"
+			  v-on:empty-spot-clicked="emptySpotClicked"></column>
 		</p>
 	</div>
 	<script type="text/javascript" src="columns.js"></script>
