@@ -14,10 +14,14 @@ function fileFor(rank, suit) {
 let id = 0;
 
 for (let suit of suits) {
+	let value = 0;
 	for (let rank of ranks) {
+		let color = (suit == 'hearts' || suit == 'diamonds' ? 'red' : 'black');
 		cards.push({
 			rank: rank,
 			suit: suit,
+			color: color,
+			value: ++value,
 			id: 'card' + id,
 			selected: false,
 			reversed: false,
@@ -89,7 +93,7 @@ var app = new Vue({
 		},
 
 		cardClicked: function(card, column) {
-			alert("You clicked " + card.name());
+			cardClicked.call(this, card, column);
 		},
 	}
 });
