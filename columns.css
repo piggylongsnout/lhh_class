@@ -5,6 +5,17 @@ span.column {
     vertical-align: top;
 }
 
+span.column.empty span.empty-spot {
+    display: inline-block;
+    height: 1.452in;
+    width: 1in;
+    margin: 3px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    border-radius: 3px;
+}
+
 span.card {
     display: inline-block;
     height: 0.25in /*1.452in*/;

@@ -31,13 +31,16 @@ Vue.component('column', {
 	},
 
 	template: `
-		<span class="column">
+		<span
+		  class="column"
+		  v-bind:class="{ empty: column.empty() }">
 			<card
 			  v-for="card in column.cards"
 			  v-bind:key="card.id"
 			  v-bind:card="card"
 			  v-on:card-clicked="cardClicked"
 			  ></card>
+			<span class="empty-spot"></span>
 		</span>
 	`,
 });

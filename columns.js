@@ -58,6 +58,10 @@ for (let i = 0; i < columnCount; ++i) {
 			this.cards = [];
 		},
 
+		empty: function() {
+			return this.cards.length == 0;
+		},
+
 		popFrom: function(card) {
 			let index = this.cards.indexOf(card);
 
