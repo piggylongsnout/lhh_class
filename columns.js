@@ -14,10 +14,14 @@ function fileFor(rank, suit) {
 let id = 0;
 
 for (let suit of suits) {
+	let value = 0;
 	for (let rank of ranks) {
+		let color = (suit == 'hearts' || suit == 'diamonds' ? 'red' : 'black');
 		cards.push({
 			rank: rank,
 			suit: suit,
+			color: color,
+			value: ++value,
 			id: 'card' + id,
 			selected: false,
 			reversed: false,
@@ -54,6 +58,10 @@ for (let i = 0; i < columnCount; ++i) {
 			this.cards = [];
 		},
 
+		empty: function() {
+			return this.cards.length == 0;
+		},
+
 		popFrom: function(card) {
 			let index = this.cards.indexOf(card);
 
@@ -70,11 +78,25 @@ for (let i = 0; i < columnCount; ++i) {
 	});
 }
 
+let acePiles = [];
+
+for (let i = 0; i < 4; ++i) {
+	acePiles.push({
+		id: 'acePile' + i,
+		cards: [],
+
+		empty: function() {
+			return this.cards.length == 0;
+		},
+	});
+}
+
 var app = new Vue({
 	el: '#board',
 	data: {
 		cards: cards,
 		columns: columns,
+		acePiles: acePiles,
 		lastClicked: null,
 	},
 	methods: {
@@ -89,7 +111,11 @@ var app = new Vue({
 		},
 
 		cardClicked: function(card, column) {
-			alert("You clicked " + card.name());
+			cardClicked.call(this, card, column);
+		},
+
+		emptySpotClicked: function(column) {
+			emptySpotClicked.call(this, column);
 		},
 	}
 });

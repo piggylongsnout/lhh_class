@@ -1,15 +1,15 @@
-Vue.component('column', {
-	props: ['column'],
+Vue.component('ace-pile', {
+	props: ['acePile'],
 
 	methods: {
 		cardClicked: function(card) {
-			if (card == this.lastCard() || !card.reversed) {
-				this.$emit('card-clicked', card, this.column);
-			}
+			//if (card == this.lastCard() || !card.reversed) {
+			//	this.$emit('card-clicked', card, this.column);
+			//}
 		},
 
 		cards: function() {
-			return this.column.cards;
+			return this.acePile.cards;
 		},
 
 		empty: function() {
@@ -21,7 +21,7 @@ Vue.component('column', {
 		},
 
 		id: function() {
-			return this.column.id;
+			return this.acePile.id;
 		},
 
 		lastCard: function() {
@@ -36,10 +36,10 @@ Vue.component('column', {
 
 	template: `
 		<span
-		  class="column"
-		  v-bind:class="{ empty: column.empty() }">
+		  class="ace-pile"
+		  v-bind:class="{ empty: acePile.empty() }">
 			<card
-			  v-for="card in column.cards"
+			  v-for="card in acePile.cards"
 			  v-bind:key="card.id"
 			  v-bind:card="card"
 			  v-on:card-clicked="cardClicked"
