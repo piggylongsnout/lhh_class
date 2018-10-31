@@ -26,11 +26,11 @@ for (let suit of suits) {
 			selected: false,
 			reversed: false,
 
-			file: function() {
+			file: function () {
 				return fileFor(this.rank, this.suit);
 			},
 
-			swap: function(other) {
+			swap: function (other) {
 				let thisIndex = cards.indexOf(this);
 				let otherIndex = cards.indexOf(other);
 
@@ -38,7 +38,7 @@ for (let suit of suits) {
 				cards[otherIndex] = this;
 			},
 
-			name: function() {
+			name: function () {
 				return this.rank + ' of ' + this.suit;
 			},
 		});
@@ -54,15 +54,15 @@ for (let i = 0; i < columnCount; ++i) {
 		id: i,
 		cards: [],
 
-		clear: function() {
+		clear: function () {
 			this.cards = [];
 		},
 
-		empty: function() {
+		empty: function () {
 			return this.cards.length == 0;
 		},
 
-		popFrom: function(card) {
+		popFrom: function (card) {
 			let index = this.cards.indexOf(card);
 
 			let cards = this.cards.slice(index);
@@ -72,7 +72,7 @@ for (let i = 0; i < columnCount; ++i) {
 			return cards;
 		},
 
-		append: function(cards) {
+		append: function (cards) {
 			this.cards = this.cards.concat(cards);
 		},
 	});
@@ -85,7 +85,7 @@ for (let i = 0; i < 4; ++i) {
 		id: 'acePile' + i,
 		cards: [],
 
-		empty: function() {
+		empty: function () {
 			return this.cards.length == 0;
 		},
 	});
@@ -97,10 +97,10 @@ var app = new Vue({
 		cards: cards,
 		columns: columns,
 		acePiles: acePiles,
-		lastClicked: null,
+		lastClicked: { card: null, column: null },
 	},
 	methods: {
-		deal: function() {
+		deal: function () {
 			for (let column of this.columns) {
 				column.clear();
 			}
@@ -110,19 +110,33 @@ var app = new Vue({
 			deal.call(this);
 		},
 
-		cardClicked: function(card, column) {
-			if (this.lastClicked != null) {
-				let lastCard = this.lastClicked.card;
-				let lastColumn = this.lastClicked.column;
-				cardClicked.call(this, card, column, lastCard, lastColumn);
+		cardClicked: function (card, column) {
+			let lastCard = this.lastClicked.card;
+			let lastColumn = this.lastClicked.column;
+
+			console.log("Clicked " + card.name());
+			if (lastCard != null) {
+				console.log("Last card " + lastCard.name());
 			}
-			else {
-				cardClicked.call(this, card, column, null, null);
-			}
+
+			cardClicked.call(this, card, column, lastCard, lastColumn);
 		},
 
-		emptySpotClicked: function(column) {
-			emptySpotClicked.call(this, column);
+		emptySpotClicked: function (column) {
+			let lastCard = this.lastClicked.card;
+			let lastColumn = this.lastClicked.column;
+			emptySpotClicked.call(this, column, lastCard, lastColumn);
 		},
+
+		remember: function(lastCard, lastColumn) {
+			this.lastClicked = {
+				card: lastCard,
+				column: lastColumn,
+			};
+		},
+
+		forget: function() {
+			this.remember(null, null);
+		}
 	}
 });
