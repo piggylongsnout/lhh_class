@@ -8,6 +8,8 @@
 	<script type="text/javascript" src="shuffle.js"></script>
 	<script type="text/javascript" src="cardClicked.js"></script>
 	<script type="text/javascript" src="emptySpotClicked.js"></script>
+	<script type="text/javascript" src="aceCardClicked.js"></script>
+	<script type="text/javascript" src="aceEmptySpotClicked.js"></script>
 	<script type="text/javascript" src="ace-pile-component.js"></script>
 	<script type="text/javascript" src="card-component.js"></script>
 	<script type="text/javascript" src="column-component.js"></script>
@@ -18,7 +20,9 @@
 		<p class="ace-piles"><ace-pile
 			  v-for="acePile in acePiles"
 			  v-bind:key="acePile.id"
-			  v-bind:ace-pile="acePile"></ace-pile></p>
+			  v-bind:ace-pile="acePile"
+			  v-on:card-clicked="aceCardClicked"
+			  v-on:empty-spot-clicked="aceEmptySpotClicked"></ace-pile></p>
 		<p class="columns"><column
 			  v-for="column in columns"
 			  v-bind:key="column.id"

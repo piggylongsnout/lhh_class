@@ -3,9 +3,7 @@ Vue.component('ace-pile', {
 
 	methods: {
 		cardClicked: function(card) {
-			//if (card == this.lastCard() || !card.reversed) {
-			//	this.$emit('card-clicked', card, this.column);
-			//}
+			this.$emit('card-clicked', card, this.acePile);
 		},
 
 		cards: function() {
@@ -17,7 +15,7 @@ Vue.component('ace-pile', {
 		},
 
 		emptySpotClicked: function() {
-			this.$emit('empty-spot-clicked', this.column);
+			this.$emit('empty-spot-clicked', this.acePile);
 		},
 
 		id: function() {

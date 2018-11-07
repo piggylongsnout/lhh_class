@@ -100,6 +100,24 @@ var app = new Vue({
 		lastClicked: { card: null, column: null },
 	},
 	methods: {
+		aceCardClicked: function(card, acePile) {
+			let lastCard = this.lastClicked.card;
+			let lastColumn = this.lastClicked.column;
+
+			console.log("Clicked " + card.name());
+			if (lastCard != null) {
+				console.log("Last card " + lastCard.name());
+			}
+
+			aceCardClicked.call(this, card, acePile, lastCard, lastColumn);
+		},
+
+		aceEmptySpotClicked: function(acePile) {
+			let lastCard = this.lastClicked.card;
+			let lastColumn = this.lastClicked.column;
+			aceEmptySpotClicked.call(this, acePile, lastCard, lastColumn);
+		},
+
 		deal: function () {
 			for (let column of this.columns) {
 				column.clear();
