@@ -85,8 +85,26 @@ for (let i = 0; i < 4; ++i) {
 		id: 'acePile' + i,
 		cards: [],
 
+		append: function (cards) {
+			this.cards = this.cards.concat(cards);
+		},
+
+		clear: function () {
+			this.cards = [];
+		},
+
 		empty: function () {
 			return this.cards.length == 0;
+		},
+
+		popFrom: function (card) {
+			let index = this.cards.indexOf(card);
+
+			let cards = this.cards.slice(index);
+
+			this.cards.splice(index);
+
+			return cards;
 		},
 	});
 }
@@ -100,10 +118,39 @@ var app = new Vue({
 		lastClicked: { card: null, column: null },
 	},
 	methods: {
+		aceCardClicked: function(card, acePile) {
+			let lastCard = this.lastClicked.card;
+			let lastColumn = this.lastClicked.column;
+
+			console.log("Clicked " + card.name());
+			if (lastCard != null) {
+				console.log("Last card " + lastCard.name());
+			}
+
+			aceCardClicked.call(this, card, acePile, lastCard, lastColumn);
+		},
+
+		aceEmptySpotClicked: function(acePile) {
+			let lastCard = this.lastClicked.card;
+			let lastColumn = this.lastClicked.column;
+			aceEmptySpotClicked.call(this, acePile, lastCard, lastColumn);
+		},
+
 		deal: function () {
 			for (let column of this.columns) {
 				column.clear();
 			}
+
+			for (let acePile of this.acePiles) {
+				acePile.clear();
+			}
+
+			for (let card of this.cards) {
+				card.selected = false;
+				card.reversed = false;
+			}
+
+			this.forget();
 
 			shuffle.call(this);
 
