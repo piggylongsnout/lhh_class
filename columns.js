@@ -85,8 +85,22 @@ for (let i = 0; i < 4; ++i) {
 		id: 'acePile' + i,
 		cards: [],
 
+		append: function (cards) {
+			this.cards = this.cards.concat(cards);
+		},
+
 		empty: function () {
 			return this.cards.length == 0;
+		},
+
+		popFrom: function (card) {
+			let index = this.cards.indexOf(card);
+
+			let cards = this.cards.slice(index);
+
+			this.cards.splice(index);
+
+			return cards;
 		},
 	});
 }
