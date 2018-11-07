@@ -9,7 +9,7 @@ function deal() {
 
              let card = this.cards[a];
              a++
-             card.reversed = false
+            card.reversed = false
             if(col == row == 1) {card.reversed = false} else {card.reversed = true};
             this.columns[col].cards.push(card);
 
