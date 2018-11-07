@@ -89,6 +89,10 @@ for (let i = 0; i < 4; ++i) {
 			this.cards = this.cards.concat(cards);
 		},
 
+		clear: function () {
+			this.cards = [];
+		},
+
 		empty: function () {
 			return this.cards.length == 0;
 		},
@@ -136,6 +140,17 @@ var app = new Vue({
 			for (let column of this.columns) {
 				column.clear();
 			}
+
+			for (let acePile of this.acePiles) {
+				acePile.clear();
+			}
+
+			for (let card of this.cards) {
+				card.selected = false;
+				card.reversed = false;
+			}
+
+			this.forget();
 
 			shuffle.call(this);
 

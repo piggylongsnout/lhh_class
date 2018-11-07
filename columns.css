@@ -31,6 +31,10 @@ span.card {
     padding: 0px 3px;
 }
 
+span.ace-pile span.card {
+    height: 0;
+}
+
 span.card.selected img {
     background-color: blue;
     padding: 3px;
