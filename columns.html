@@ -10,6 +10,7 @@
 	<script type="text/javascript" src="emptySpotClicked.js"></script>
 	<script type="text/javascript" src="aceCardClicked.js"></script>
 	<script type="text/javascript" src="aceEmptySpotClicked.js"></script>
+	<script type="text/javascript" src="resetDownPile.js"></script>
 	<script type="text/javascript" src="ace-pile-component.js"></script>
 	<script type="text/javascript" src="card-component.js"></script>
 	<script type="text/javascript" src="column-component.js"></script>
@@ -28,8 +29,14 @@
 			  v-bind:key="column.id"
 			  v-bind:column="column"
 			  v-on:card-clicked="cardClicked"
-			  v-on:empty-spot-clicked="emptySpotClicked"></column>
-		</p>
+			  v-on:empty-spot-clicked="emptySpotClicked"></column></p>
+		<p class="draw-pile"><column
+			  v-bind:column="downPile"
+			  v-on:card-clicked="downPileClicked"
+			  v-on:empty-spot-clicked="emptyDownPileClicked"
+			  ></column><column
+			  v-bind:column="upPile"
+			  v-on:card-clicked="upPileClicked"></column></p>
 	</div>
 	<script type="text/javascript" src="columns.js"></script>
 </body>

@@ -49,9 +49,9 @@ for (let suit of suits) {
 
 let columns = [];
 
-for (let i = 0; i < columnCount; ++i) {
-	columns.push({
-		id: i,
+function makeColumn(id) {
+	return {
+		id: id,
 		cards: [],
 
 		clear: function () {
@@ -75,38 +75,26 @@ for (let i = 0; i < columnCount; ++i) {
 		append: function (cards) {
 			this.cards = this.cards.concat(cards);
 		},
-	});
+
+		lastCard: function() {
+			if (this.empty()) {
+				return null;
+			}
+			else {
+				return this.cards[this.cards.length - 1];
+			}
+		},
+	};
+}
+
+for (let i = 0; i < columnCount; ++i) {
+	columns.push(makeColumn(i));
 }
 
 let acePiles = [];
 
 for (let i = 0; i < 4; ++i) {
-	acePiles.push({
-		id: 'acePile' + i,
-		cards: [],
-
-		append: function (cards) {
-			this.cards = this.cards.concat(cards);
-		},
-
-		clear: function () {
-			this.cards = [];
-		},
-
-		empty: function () {
-			return this.cards.length == 0;
-		},
-
-		popFrom: function (card) {
-			let index = this.cards.indexOf(card);
-
-			let cards = this.cards.slice(index);
-
-			this.cards.splice(index);
-
-			return cards;
-		},
-	});
+	acePiles.push(makeColumn('acePile' + i));
 }
 
 var app = new Vue({
@@ -115,6 +103,8 @@ var app = new Vue({
 		cards: cards,
 		columns: columns,
 		acePiles: acePiles,
+		downPile: makeColumn('downPile'),
+		upPile: makeColumn('upPile'),
 		lastClicked: { card: null, column: null },
 	},
 	methods: {
@@ -155,6 +145,15 @@ var app = new Vue({
 			shuffle.call(this);
 
 			deal.call(this);
+
+			// it takes 28 cards to deal the game
+			this.downPile.cards = this.cards.slice(28);
+
+			for (let card of this.downPile.cards) {
+				card.reversed = true;
+			}
+
+			this.upPile.clear();
 		},
 
 		cardClicked: function (card, column) {
@@ -167,6 +166,28 @@ var app = new Vue({
 			}
 
 			cardClicked.call(this, card, column, lastCard, lastColumn);
+		},
+
+		downPileClicked: function(card, column) {
+			if (card == column.lastCard()) {
+				column.cards.pop();
+				card.reversed = false;
+				this.upPile.cards.push(card);
+			}
+		},
+
+		emptyDownPileClicked: function() {
+			resetDownPile.call(this, this.downPile, this.upPile);
+			this.forget();
+			for (let card of cards) {
+				card.selected = false;
+			}
+		},
+
+		upPileClicked: function(card, column, lastCard, lastColumn) {
+			if (card == lastCard || lastCard == null) {
+				this.cardClicked(card, column);
+			}
 		},
 
 		emptySpotClicked: function (column) {
@@ -184,6 +205,6 @@ var app = new Vue({
 
 		forget: function() {
 			this.remember(null, null);
-		}
+		},
 	}
 });
